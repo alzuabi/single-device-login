@@ -1,0 +1,4 @@
+jwt:
+  key: UhFkhzPma4Yrl175Z+yWX1s8P16Bd/xwKHFxptXv2O4=
+  access-token-exp: 3600000
+  refresh-token-exp: 86400000

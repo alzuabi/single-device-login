@@ -1,0 +1,9 @@
+version: '3.9'
+
+services:
+  single-device-login:
+    build: .
+    image: single-device-login:latest
+    container_name: single-device-login
+    ports:
+      - "8081:8081"
