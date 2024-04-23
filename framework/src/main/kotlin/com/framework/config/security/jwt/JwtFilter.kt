@@ -48,7 +48,8 @@ class JwtAuthFilter(
     private fun updateContext(request: HttpServletRequest) {
         requestContext.jwtToken?.let { jwtToken ->
             if (SecurityContextHolder.getContext().authentication == null) {
-                val foundUser = userDetailsService.loadUserByUsername(jwtUtils.getSubject(jwtToken))
+                val foundUser =
+                    userDetailsService.loadUserByUsername(jwtUtils.getClaim(jwtToken) { s -> jwtUtils.getClaims(s).subject })
                 if (jwtUtils.isValid(jwtToken, foundUser)) {
                     val currentUser = foundUser as User
                     updateSecurityContext(currentUser, request)

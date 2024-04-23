@@ -51,11 +51,11 @@ class JwtUtils(private val jwtProps: JwtProps) {
         .parseSignedClaims(jwtToken)
         .payload
 
-    fun getSubject(jwtToken: String): String = getClaims(jwtToken).subject
-    fun getExpiration(jwtToken: String): Date = getClaims(jwtToken).expiration
+    fun <T> getClaim(jwtToken: String, fn: (String) -> T) = fn.invoke(jwtToken)
 
-    fun isValid(jwtToken: String, user: UserDetails) = getSubject(jwtToken) ==
-            user.username && getExpiration(jwtToken).after(Date.from(Instant.now()))
+    fun isValid(jwtToken: String, user: UserDetails) =
+        getClaim(jwtToken) { s -> getClaims(s).subject } == user.username &&
+                getClaim(jwtToken) { getClaims(jwtToken).expiration }.after(Date.from(Instant.now()))
 
     fun getJwtToken(httpServletRequest: HttpServletRequest): String? {
         if (httpServletRequest.getHeader("Authorization") != null && httpServletRequest.getHeader("Authorization")
