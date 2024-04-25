@@ -38,7 +38,7 @@ class JwtAuthFilter(
 
     private fun checkLoggedInUserDevice() {
         if (requestContext.currentUser != null && requestContext.currentDevice != null) {
-            activeUserDeviceRepository.findByUserOrDevice(
+            activeUserDeviceRepository.findByUserAndDevice(
                 requestContext.currentUser!!,
                 requestContext.currentDevice!!
             ) ?: throw DeviceLoggedOut()

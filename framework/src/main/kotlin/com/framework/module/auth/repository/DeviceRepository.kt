@@ -21,6 +21,6 @@ interface ActiveUserDeviceRepository : JpaRepository<ActiveUserDevice, Long> {
     @Transactional
     fun deleteActiveUserDeviceByUserOrDevice(user: User, device: Device)
 
-    fun findByUserOrDevice(user: User, device: Device): ActiveUserDevice?
+    fun findByUserAndDevice(user: User, device: Device): ActiveUserDevice?
 
 }

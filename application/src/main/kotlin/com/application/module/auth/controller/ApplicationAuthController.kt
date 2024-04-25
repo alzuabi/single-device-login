@@ -39,7 +39,6 @@ class ApplicationAuthController(
     fun dummy(): BaseResponse<Map<String, Any>> {
         return mapOf("test" to 1).success()
     }
-
 }
 
 

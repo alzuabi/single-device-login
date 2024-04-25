@@ -103,6 +103,6 @@ class Device(
 
 @Entity
 class ActiveUserDevice(
-    @ManyToOne val user: User,
+    @OneToOne val user: User,
     @OneToOne val device: Device
 ) : BaseEntity<Long>()
